@@ -17,4 +17,14 @@ if(isset($_POST["register"])){
         }
     }
 }
+if(isset($_POST["login"])){
+    mysqli_set_charset($db,"utf8");
+    $email=$_POST["email"];
+    $password=$_POST["password"];
+    if(login_user($email,$password)){
+        $message= 'ورود با موفقیت انجام شد. وارد حساب کاربری خود شوید.';
+    }else{
+        $error='اطلاعات ورودی صحیح نمی‌باشد.';
+    }
+}
 ?>

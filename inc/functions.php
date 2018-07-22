@@ -9,10 +9,10 @@ function register_user($name,$email,$password){
         return false;
     }
 }
-function login_user($name,$email,$password){
+function login_user($email,$password){
     global $db;
-    $query=mysqli_query($db,"SELECT * FROM users WHERE ");
-    if($query){
+    $query=mysqli_query($db,"SELECT * FROM users WHERE email='$email' AND password='$password'");
+    if(mysqli_num_rows($query)>0){
         return true;
     }else{
         return false;
