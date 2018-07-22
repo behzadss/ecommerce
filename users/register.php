@@ -1,6 +1,8 @@
 <?php
 require_once '../inc/config.php';
-
+if (is_login()) {
+    redirect('profile');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

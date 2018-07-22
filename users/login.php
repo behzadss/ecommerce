@@ -1,8 +1,8 @@
 <?php require_once '../inc/config.php';
-/*if (is_login()) {
+if (is_login()) {
     redirect('profile');
 }
-require_once '../sections/header.php';*/
+//require_once '../sections/header.php';
 ?>
 
 <!DOCTYPE html>

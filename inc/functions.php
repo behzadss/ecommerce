@@ -18,4 +18,25 @@ function login_user($email,$password){
         return false;
     }
 }
+function is_login(){
+    if(isset($_SESSION['user_email'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+function redirect($url){
+    header("Location:" . $url);
+}
+function is_logout(){
+    unset($_SESSION['user_email']);
+       
+}
+function get_userdata(){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $email=$_SESSION['user_email'];
+    $query = mysqli_query($db,"SELECT * FROM users WHERE email='$email'");
+    return mysqli_fetch_array($query);
+}
 ?>
