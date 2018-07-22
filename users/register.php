@@ -8,7 +8,7 @@ require_once '../inc/config.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="../styles/styles.css">
     <title>ساخت حساب کاربری جدید</title>
 </head>
 <body>
@@ -27,7 +27,7 @@ require_once '../inc/config.php';
         <h1>ساخت حساب کاربری جدید</h1>
         </div>
     </div>
-   <div class="form-box">
+   <div class="forms-box">
    <?php
    if($message){
     ?>
@@ -38,13 +38,13 @@ require_once '../inc/config.php';
    <?php } ?>
         <form action="register.php" method="post">
             <p>نام و نام خانوادگی ( به فارسی )</p>
-            <input type="text" name="name" id=""><br>
+            <input type="text" name="name" autocomplete='off' required><br>
             <p>ایمیل</p>
-            <input type="email" name="email" id=""><br>
+            <input type="email" name="email" autocomplete='off' required><br>
             <p>کلمه عبور</p>
-            <input type="password" name="password" id=""><br>
+            <input type="password" name="password" autocomplete='off' required><br>
             <p>تکرار کلمه عبور</p>
-            <input type="password" name="password-conf" id=""><br>
+            <input type="password" name="password-conf" ><br>
             <input type="submit" name="register" value="ساخت حساب کاربری جدید">
         </form>
         <p class="note">قبلا ثبت‌نام کرده‌اید؟ <a href="login.php">وارد شوید.</a></p>
