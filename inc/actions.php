@@ -12,8 +12,7 @@ if(isset($_POST["register"])){
     }else{
         if(register_user($name,$email,$password)){
             $message= 'ثبت نام با موفقیت انجام شد. وارد حساب کاربری خود شوید.';
-        }
-    else{
+        }else{
             $error= 'مشکلی به وجود آمده است.';
         }
     }
