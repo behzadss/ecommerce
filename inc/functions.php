@@ -39,4 +39,85 @@ function get_userdata(){
     $query = mysqli_query($db,"SELECT * FROM users WHERE email='$email'");
     return mysqli_fetch_array($query);
 }
+function admin_login($username,$password){
+    if($username==ADMIN_USERNAME && $password==ADMIN_PASSWORD){
+        return true;
+    }else{
+        return false;
+    }
+}
+function is_admin_login(){
+    if(isset($_SESSION['admin-login'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+function is_admin_logout(){
+    unset($_SESSION['admin-login']);
+       
+}
+function adding_product($name,$price,$cat,$desc){
+    global $db;
+    $query=mysqli_query($db,"INSERT INTO products (product_name,product_price,product_cat,product_desc) VALUES ('$name','$price','$cat','$desc')");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
+function get_products(){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM products ORDER BY id DESC");
+    return $query;
+}
+function delete_product($id){
+    global $db;
+    $query=mysqli_query($db,"DELETE FROM products WHERE id='$id'");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
+function adding_cat($name){
+    global $db;
+    $query=mysqli_query($db,"INSERT INTO category (cat_name) VALUES ('$name')");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
+function get_cats(){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM category ORDER BY id DESC");
+    return $query;
+}
+function delete_cat($id){
+    global $db;
+    $query=mysqli_query($db,"DELETE FROM category WHERE id='$id'");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
+function get_users(){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM users ORDER BY id DESC");
+    return $query;
+}
+function delete_user($id){
+    global $db;
+    $query=mysqli_query($db,"DELETE FROM users WHERE id='$id'");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
 ?>
