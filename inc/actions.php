@@ -51,9 +51,10 @@ if(isset($_POST["add-product"])){
     $name=$_POST["product-name"];
     $price=$_POST["product-price"];
     $cat=$_POST["product-cat"];
-    //$image=$_FILES["product-image"]
+    $image=$_FILES["product-image"]['name'];
+    $tmp=$_FILES["product-image"]['tmp_name'];
     $desc=$_POST["product-desc"];
-        if(adding_product($name,$price,$cat,$desc)){
+        if(adding_product($name,$price,$cat,$image,$tmp,$desc)){
             $message= 'محصول اضافه گردید.';
         }else{
             $error= 'مشکلی به وجود آمده است.';

@@ -57,9 +57,10 @@ function is_admin_logout(){
     unset($_SESSION['admin-login']);
        
 }
-function adding_product($name,$price,$cat,$desc){
+function adding_product($name,$price,$cat,$image,$tmp,$desc){
     global $db;
-    $query=mysqli_query($db,"INSERT INTO products (product_name,product_price,product_cat,product_desc) VALUES ('$name','$price','$cat','$desc')");
+    move_uploaded_file($tmp,'../images/' . $image);
+    $query=mysqli_query($db,"INSERT INTO products (product_name,product_price,product_cat,product_image,product_desc) VALUES ('$name','$price','$cat','$image','$desc')");
     if($query){
         return true;
     }else{
