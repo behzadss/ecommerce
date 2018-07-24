@@ -19,6 +19,14 @@ $user_data = get_userdata();
     <div id="logo">
         <h1>ویرایش پروفایل <?php echo $user_data['display_name'] ?></h1>
     </div>
+    <?php
+   if($message){
+    ?>
+    <div class="message"><?php echo $message ?></div>
+   <?php } 
+   if($error){?>
+       <div class="error"><?php echo $error ?></div>
+   <?php } ?>
 </div>
 
 
