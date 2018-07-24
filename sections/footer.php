@@ -17,12 +17,11 @@
         </div>
 
         <div class="footer-item">
-            <div class="footer-item-title">لینک‌های مفید</div>
+            <div class="footer-item-title">درباره ما</div>
             <div class="footer-item-content">
                 <ul>
                     <li><a href="#">صفحه اصلی</a></li>
-                    <li><a href="#">محصولات آموزشی</a></li>
-                    <li><a href="#">وبلاگ</a></li>
+                    <li><a href="#"> محصولات</a></li>
                     <li><a href="#">درباره ما</a></li>
                     <li><a href="#">تماس با ما</a></li>
                     <li><a href="#">بخش مدیریت</a></li>
@@ -32,4 +31,4 @@
     </div>
     <div class="clear"></div>
 </div>
-<div id="copyright"><p class="container">تمامی حقوق برای مرکز آموزشی زنبیل محفوظ می‌باشد.</p></div>
+<div id="copyright"><p class="container">تمامی حقوق برای فروشگاه محفوظ می‌باشد.</p></div>
