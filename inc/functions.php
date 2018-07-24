@@ -125,11 +125,16 @@ function delete_user($id){
         return false;
     }
 }
-function get_product_id($id){
+function get_product_id($id,$is_array = false){
     global $db;
     mysqli_set_charset($db,"utf8");
     $query=mysqli_query($db,"SELECT * FROM products WHERE id='$id'");
-    return $query;
+    if ($is_array == true) {
+        return mysqli_fetch_array($query);
+    } else {
+        return $query;
+
+    }
 }
 function get_comments_by_product_id($id){
     global $db;
@@ -193,13 +198,49 @@ function approve_comment($id){
                 return false;
             }
         }
-        function update_profile($name,$address,$num){
+        function update_user($name,$address,$num,$email,$image_user2,$tmp_user=null){
             global $db;
-            mysqli_set_charset($db,"utf8");
-            $query=mysqli_query($db,"UPDATE users SET display_name='$name' , user_address='$address', user_number='$num'");
+            if(!isset($tmp_user)){
+            $query=mysqli_query($db,"UPDATE users SET display_name='$name' , user_address='$address' , user_number='$num', user_image='$image_user2'  WHERE email='$email'");
+            }else{
+            move_uploaded_file($tmp_user,'../../images/profile/' . $image_user2);
+            $query=mysqli_query($db,"UPDATE users SET display_name='$name' , user_address='$address' , user_number='$num', user_image='$image_user2'  WHERE email='$email'");
+            }
             if($query){
                 return true;
             }else{
                 return false;
-            }}
+            }
+        }
+        function add_to_cart($ip,$id){
+            global $db;
+            $query=mysqli_query($db,"INSERT INTO cart (ip,product_id) VALUES ('$ip','$id')");
+            if($query){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function get_cart_items(){
+        global $db;
+        $ip=$_SERVER['REMOTE_ADDR'];
+        $query=mysqli_query($db,"SELECT * FROM cart WHERE ip='$ip'");
+        $product_ids=array();
+        while($row=mysqli_fetch_array($query)){
+            $product_ids[] = $row['product_id'];
+        }
+        $products=array();
+        foreach ($product_ids as $product_id) {
+            $products[] = get_product_id($product_id,true);
+        }
+        return $products;
+    }
+        function cart_total(){
+        $cart_total=0;
+        $cart_items=get_cart_items();
+        foreach ($cart_items as $cart_item) {
+            $cart_total += $cart_item['product_price'];
+        }
+        return $cart_total;
+    }
 ?>

@@ -1,7 +1,5 @@
 <?php require_once 'inc/config.php';
-$products = get_products(8);
-//require_once 'sections/header.php';
-?>
+$products = get_products(8); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,22 +8,9 @@ $products = get_products(8);
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-
-<div id="header">
-    <div id="top-nav">
-        <nav class="container">
-            <ul>
-                <li><a href="<?php //echo PATH; ?>">صفحه اصلی</a></li>
-                <li><a href="<?php //echo PATH; ?>index.php#products">محصولات آموزشی</a></li>
-                <li><a href="<?php //echo PATH; ?>about.php">درباره ما</a></li>
-                <li><a href="<?php// echo PATH; ?>contact.php">تماس با ما</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="logo">
-        <h1>فروشگاه اینترنتی</h1>
-    </div>
-</div>
+    <?php
+require_once 'sections/header.php';
+?>
 <div id="main">
     <div id="content">
         <div id="products">
@@ -38,12 +23,12 @@ $products = get_products(8);
                     <div class="read-more"><a href="product.php?product-id=<?php echo $product['id'] ?>">جزئیات محصول</a></div>
                 </div>
             <?php } ?>
-
+            
         </div>
     </div>
-    <?php //require_once 'sections/sidebar.php' ?>
+    <?php require_once 'sections/sidebar.php' ?>
 </div>
 <div class="clear"></div>
-<?php //require_once 'sections/footer.php' ?>
+<?php require_once 'sections/footer.php' ?>
 </body>
 </html>

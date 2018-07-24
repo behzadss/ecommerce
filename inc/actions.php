@@ -158,10 +158,26 @@ if(isset($_POST["add-comment"])){
                 $name=$_POST["display-name"];
                 $address=$_POST["user-address"];
                 $num=$_POST["user-number"];
-                if(update_profile($name,$address,$num)){
-                    $message= 'نظر با موفقیت تأیید گردید.';
+                $email=$_POST["user-email"];
+                if(!empty($_FILES['new-user-image']['name'])){
+                    $image_user=$_FILES["new-user-image"]['name'];
+                    $tmp_user=$_FILES["new-user-image"]['tmp_name'];
+                    $update_user=update_user($name,$address,$num,$email,$image_user,$tmp_user);
+                    }else{
+                    $image_user2=$_POST["user-image"];
+                    $update_user=update_user($name,$address,$num,$email,$image_user2);
+                }
+                if($update_user){
+                    $message= 'مشخصات بروزرسانی گردید.';
                 }else{
                     $error= 'مشکلی به وجود آمده است.';
                 }
+            }
+            if(isset($_GET["add-to-cart"])){
+                $id=$_GET["add-to-cart"];
+                $ip=$_SERVER['REMOTE_ADDR'];
+                if(add_to_cart($ip,$id)){
+                    redirect('cart.php');
                 }
+            }
         ?>
