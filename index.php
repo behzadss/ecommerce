@@ -1,5 +1,5 @@
 <?php require_once 'inc/config.php';
-$products = get_products(6);
+$products = get_products(8);
 //require_once 'sections/header.php';
 ?>
 <!doctype html>
@@ -15,10 +15,10 @@ $products = get_products(6);
     <div id="top-nav">
         <nav class="container">
             <ul>
-                <li><a href="<?php echo PATH; ?>">صفحه اصلی</a></li>
-                <li><a href="<?php echo PATH; ?>index.php#products">محصولات آموزشی</a></li>
-                <li><a href="<?php echo PATH; ?>about.php">درباره ما</a></li>
-                <li><a href="<?php echo PATH; ?>contact.php">تماس با ما</a></li>
+                <li><a href="<?php //echo PATH; ?>">صفحه اصلی</a></li>
+                <li><a href="<?php //echo PATH; ?>index.php#products">محصولات آموزشی</a></li>
+                <li><a href="<?php //echo PATH; ?>about.php">درباره ما</a></li>
+                <li><a href="<?php// echo PATH; ?>contact.php">تماس با ما</a></li>
             </ul>
         </nav>
     </div>

@@ -67,10 +67,14 @@ function adding_product($name,$price,$cat,$image,$tmp,$desc){
         return false;
     }
 }
-function get_products(){
+function get_products($limit=0){
     global $db;
     mysqli_set_charset($db,"utf8");
-    $query=mysqli_query($db,"SELECT * FROM products ORDER BY id DESC");
+    if($limit == 0){
+        $query=mysqli_query($db,"SELECT * FROM products ORDER BY id DESC");
+    }else{
+        $query=mysqli_query($db,"SELECT * FROM products ORDER BY id DESC LIMIT $limit");
+    }
     return $query;
 }
 function delete_product($id){
@@ -121,4 +125,81 @@ function delete_user($id){
         return false;
     }
 }
+function get_product_id($id){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM products WHERE id='$id'");
+    return $query;
+}
+function get_comments_by_product_id($id){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM comments WHERE product_id='$id' AND is_approved='1' ORDER BY id DESC ");
+    return $query;
+}
+function add_comment($username,$email,$content,$id){
+    global $db;
+    $query=mysqli_query($db,"INSERT INTO comments (username,user_email,content,product_id) VALUES ('$username','$email','$content','$id')");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }
+}
+function get_comments(){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"SELECT * FROM comments WHERE is_approved='0'");
+    return $query;
+}
+function approve_comment($id){
+    global $db;
+    mysqli_set_charset($db,"utf8");
+    $query=mysqli_query($db,"UPDATE comments SET is_approved='1' WHERE id='$id'");
+    if($query){
+        return true;
+    }else{
+        return false;
+    }}
+    function delete_comment($id){
+        global $db;
+        $query=mysqli_query($db,"DELETE FROM comments WHERE id='$id'");
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function answer_comment($id,$answer){
+        global $db;
+        mysqli_set_charset($db,"utf8");
+        $query=mysqli_query($db,"UPDATE comments SET is_approved='1' , comment_answer='$answer' WHERE id='$id'");
+        if($query){
+            return true;
+        }else{
+            return false;
+        }}
+        function update_product($name,$price,$cat,$desc,$id,$p_image,$tmp=null){
+            global $db;
+            if(!isset($tmp)){
+            $query=mysqli_query($db,"UPDATE products SET product_name='$name' , product_price='$price' , product_cat='$cat' , product_desc='$desc', product_image='$p_image'  WHERE id='$id'");
+            }else{
+            move_uploaded_file($tmp,'../images/' . $p_image);
+            $query=mysqli_query($db,"UPDATE products SET product_name='$name' , product_price='$price' , product_cat='$cat' , product_desc='$desc', product_image='$p_image'  WHERE id='$id'");
+            }
+            if($query){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function update_profile($name,$address,$num){
+            global $db;
+            mysqli_set_charset($db,"utf8");
+            $query=mysqli_query($db,"UPDATE users SET display_name='$name' , user_address='$address', user_number='$num'");
+            if($query){
+                return true;
+            }else{
+                return false;
+            }}
 ?>

@@ -1,32 +1,22 @@
+<?php require_once '../../inc/config.php'; ?>
 <?php
-require_once '../../inc/config.php';
 if (!is_login()) {
-    redirect('../../');
+    redirect('../login.php');
 }
+$user_data = get_userdata();
 ?>
-<!Doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>پروفایل کاربر</title>
+    <title>سلام، <?php echo $user_data['display_name'] ?></title>
     <link rel="stylesheet" href="../../styles/styles.css">
 </head>
 <body>
 
 <div id="header">
-    <div id="top-nav">
-        <nav class="container">
-            <ul>
-                <li><a href="#">صفحه اصلی</a></li>
-                <li><a href="#">محصولات آموزشی</a></li>
-                <li><a href="#">وبلاگ</a></li>
-                <li><a href="#">درباره ما</a></li>
-                <li><a href="#">تماس با ما</a></li>
-            </ul>
-        </nav>
-    </div>
     <div id="logo">
-        <h1> سلام  <?php echo get_userdata()['display_name'] ?> </h1>
+        <h1>سلام، <?php echo $user_data['display_name'] ?></h1>
     </div>
 </div>
 
@@ -34,14 +24,52 @@ if (!is_login()) {
 <div id="main" class="profile">
 
 
-    <div class="box">a</div>
+    <div class="box">
+        <div class="profile-info">
+            <div class="user-image">
+                <?php if ($user_data['user_image']) { ?>
+                    <img src="../../images/profile/<?php echo $user_data['user_image'] ?>" alt="<?php echo $user_data['display_name'] ?>">
+                <?php } else { ?>
+                    <img src="../../images/profile/profile.jpg" alt="پروفایل کاربری">
+                <?php } ?>
+
+            </div>
+            <div class="user-info">
+                <ul>
+                    <li>نام کاربر: <?php echo $user_data['display_name'] ?></li>
+                    <li>آدرس ایمیل: <?php echo $user_data['email'] ?></li>
+                    <li>آدرس:
+
+                        <?php
+                        if ($user_data['user_address']) {
+                            echo $user_data['user_address'];
+                        } else {
+                            echo "<span class='red-text'>از قسمت ویرایش، آدرس خود را وارد کنید ...</span>";
+                        } ?>
+
+                    </li>
+                    <li>شماره تماس:
+
+                        <?php
+                        if ($user_data['user_number']) {
+                            echo $user_data['user_number'];
+                        } else {
+                            echo "<span class='red-text'>از قسمت ویرایش، شماره‌ی تماس خود را وارد کنید ...</span>";
+                        } ?>
+
+                    </li>
+                </ul>
+                <a href="edit-profile.php">ویرایش پروفایل</a>
+            </div>
+        </div>
+    </div>
 
     <div id="sidebar">
         <div class="sidebar-item">
             <ul>
-                <li><a href="#">پروفایل</a></li>
-                <li><a href="#">سفارش ها</a></li>
-                <li><a href="#">ویرایش</a></li>
+                <li><a href="index.php">پروفایل</a></li>
+                <li><a href="orders.php">سفارش ها</a></li>
+                <li><a href="edit-profile.php">ویرایش</a></li>
                 <li><a href="?logout=1">خروج</a></li>
             </ul>
         </div>
@@ -50,6 +78,7 @@ if (!is_login()) {
 </div>
 
 <div class="clear"></div>
-<?php /*require_once '../sections/footer.php' */?>
+
+
 </body>
 </html>

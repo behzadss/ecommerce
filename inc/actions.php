@@ -93,4 +93,75 @@ if(isset($_GET["delete-user-id"])){
     $error= 'مشکلی به وجود آمده است.';
 }
 }
-?>
+if(isset($_POST["add-comment"])){
+    mysqli_set_charset($db,"utf8");
+    $username=$_POST["username"];
+    $email=$_POST["email"];
+    $content=$_POST["comment_text"];
+    $id=$_POST["product-id"];
+        if(add_comment($username,$email,$content,$id)){
+            $message= 'نظر با موفقیت ثبت گردید.';
+        }else{
+            $error= 'مشکلی به وجود آمده است.';
+        }
+    }
+    if(isset($_GET["approve-id"])){
+        $id=$_GET["approve-id"];
+        mysqli_set_charset($db,"utf8");
+            if(approve_comment($id)){
+                $message= 'نظر با موفقیت تأیید گردید.';
+            }else{
+                $error= 'مشکلی به وجود آمده است.';
+            }
+        }
+        if(isset($_GET["delete-id"])){
+            $id=$_GET["delete-id"];
+            if(delete_comment($id)){
+                $message = 'نظر با موفقیت حذف گردید.';
+        }else{
+            $error= 'مشکلی به وجود آمده است.';
+        }
+        }
+        if(isset($_POST["add-answer"])){
+            mysqli_set_charset($db,"utf8");
+            $id=$_POST["comment-id"];
+            $answer=$_POST["comment-answer"];
+            if(answer_comment($id,$answer)){
+                $message= 'نظر با موفقیت تأیید گردید.';
+            }else{
+                $error= 'مشکلی به وجود آمده است.';
+            }
+        }
+        if(isset($_POST["update-product"])){
+            mysqli_set_charset($db,"utf8");
+            $name=$_POST["product-name"];
+            $price=$_POST["product-price"];
+            $cat=$_POST["product-cat"];
+            $desc=$_POST["product-desc"];
+            $id=$_POST["product-id"];
+            if(!empty($_FILES['new-product-image']['name'])){
+            $image=$_FILES["new-product-image"]['name'];
+            $tmp=$_FILES["new-product-image"]['tmp_name'];
+            $update_product=update_product($name,$price,$cat,$desc,$id,$image,$tmp);
+            }else{
+            $p_image=$_POST["product-image"];
+            $update_product=update_product($name,$price,$cat,$desc,$id,$p_image);
+            }
+                if($update_product){
+                    $message= 'محصول بروزرسانی گردید.';
+                }else{
+                    $error= 'مشکلی به وجود آمده است.';
+                }
+            }
+            if(isset($_POST["update-profile"])){
+                mysqli_set_charset($db,"utf8");
+                $name=$_POST["display-name"];
+                $address=$_POST["user-address"];
+                $num=$_POST["user-number"];
+                if(update_profile($name,$address,$num)){
+                    $message= 'نظر با موفقیت تأیید گردید.';
+                }else{
+                    $error= 'مشکلی به وجود آمده است.';
+                }
+                }
+        ?>
