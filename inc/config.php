@@ -10,6 +10,7 @@ ini_set('display_errors',1);
 session_start();
 define("ADMIN_USERNAME","admin");
 define("ADMIN_PASSWORD","13579");
+define("PATH",'http://localhost/ecommerce/');
 
 require_once 'functions.php';
 require_once 'actions.php';
