@@ -20,11 +20,11 @@
             <div class="footer-item-title">درباره ما</div>
             <div class="footer-item-content">
                 <ul>
-                    <li><a href="#">صفحه اصلی</a></li>
-                    <li><a href="#"> محصولات</a></li>
-                    <li><a href="#">درباره ما</a></li>
-                    <li><a href="#">تماس با ما</a></li>
-                    <li><a href="#">بخش مدیریت</a></li>
+                    <li><a href="<?php echo PATH; ?>">صفحه اصلی</a></li>
+                    <li><a href="<?php echo PATH; ?>#products"> محصولات</a></li>
+                    <li><a href="<?php echo PATH; ?>about.php">درباره ما</a></li>
+                    <li><a href="<?php echo PATH; ?>contact.php">تماس با ما</a></li>
+                    <li><a href="<?php echo PATH; ?>admin">بخش مدیریت</a></li>
                 </ul>
             </div>
         </div>

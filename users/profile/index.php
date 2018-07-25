@@ -15,6 +15,9 @@ $user_data = get_userdata();
 <body>
 
 <div id="header">
+<div id="top-nav">
+        <?php require_once '../../sections/nav.php' ?>
+    </div>
     <div id="logo">
         <h1>سلام، <?php echo $user_data['display_name'] ?></h1>
     </div>
