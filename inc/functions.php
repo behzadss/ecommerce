@@ -243,4 +243,51 @@ function approve_comment($id){
         }
         return $cart_total;
     }
+    function delete_cart($id){
+        global $db;
+        $query=mysqli_query($db,"DELETE FROM cart WHERE product_id='$id'");
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function submit_order($email,$product_ids){
+        $ids= explode(',',$product_ids,-1);
+        global $db;
+        $order_id= 'bs-' . time();
+        $query=mysqli_query($db,"INSERT INTO orders (order_id,product_id,user_email) VALUES ('$order_id','$product_ids','$email')");
+    }
+    function get_user_orders(){
+        global $db;
+        $email = $_SESSION['user_email'];
+        mysqli_set_charset($db,"utf8");
+        $query=mysqli_query($db,"SELECT * FROM orders WHERE user_email='$email'");
+        $orders=array();
+        while($row=mysqli_fetch_array($query)){
+            $orders[] = $row;
+        }
+        return $orders;
+    }
+    function get_order_items($order_id){
+        global $db;
+        $query=mysqli_query($db,"SELECT * FROM orders WHERE order_id='$order_id'");
+        while($row=mysqli_fetch_array($query)){
+            $items = explode(',' , $row['product_id'], -1);
+        }
+        $products= array();
+        foreach ($items as $item) {
+        $products[]=get_product_id($item,true);
+        }
+        return $products;
+    }
+    function get_orders(){
+        global $db;
+        $query=mysqli_query($db,"SELECT * FROM orders ORDER BY id DESC");
+        $orders=array();
+        while($row=mysqli_fetch_array($query)){
+            $orders[] = $row;
+        }
+        return $orders;
+    }
 ?>

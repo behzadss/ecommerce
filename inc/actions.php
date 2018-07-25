@@ -180,4 +180,18 @@ if(isset($_POST["add-comment"])){
                     redirect('cart.php');
                 }
             }
+            if(isset($_GET["delete-from-cart"])){
+                $id=$_GET["delete-from-cart"];
+                if(delete_cart($id)){
+                    $message = 'محصول با موفقیت حذف گردید.';
+            }else{
+                $error= 'مشکلی به وجود آمده است.';
+            }
+            }
+            if(isset($_POST["submit-order"])){
+                mysqli_set_charset($db,"utf8");
+                $email=$_POST["user-email"];
+                $product_ids=$_POST["product-ids"];
+                submit_order($email,$product_ids);
+            }
         ?>
